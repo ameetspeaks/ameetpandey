@@ -5,8 +5,8 @@ import { useAuth } from "@/hooks/use-auth";
 
 const adminLinks = [
   { to: "/admin", label: "Dashboard", icon: Home, end: true },
-  { to: "/admin/posts", label: "Posts", icon: FileText },
-  { to: "/admin/categories", label: "Categories", icon: FolderTree },
+  { to: "/admin/posts", label: "All Posts", icon: FileText },
+  { to: "/admin/posts/new", label: "Add New", icon: FileText },
   { to: "/admin/tags", label: "Tags", icon: Tags },
   { to: "/admin/media", label: "Media", icon: Image },
   { to: "/admin/comments", label: "Comments", icon: MessageSquare },

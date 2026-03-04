@@ -47,6 +47,59 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_post_revisions: {
+        Row: {
+          change_note: string | null
+          changed_by: string | null
+          content: Json
+          created_at: string
+          excerpt: string | null
+          id: string
+          post_id: string
+          published_date: string | null
+          scheduled_date: string | null
+          slug: string
+          status: string
+          title: string
+        }
+        Insert: {
+          change_note?: string | null
+          changed_by?: string | null
+          content?: Json
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          post_id: string
+          published_date?: string | null
+          scheduled_date?: string | null
+          slug: string
+          status: string
+          title: string
+        }
+        Update: {
+          change_note?: string | null
+          changed_by?: string | null
+          content?: Json
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          post_id?: string
+          published_date?: string | null
+          scheduled_date?: string | null
+          slug?: string
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_post_revisions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blog_post_tags: {
         Row: {
           created_at: string
@@ -364,6 +417,10 @@ export type Database = {
     }
     Functions: {
       claim_single_admin: { Args: never; Returns: boolean }
+      create_blog_post_revision: {
+        Args: { _change_note?: string; _post_id: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
