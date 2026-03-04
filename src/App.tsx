@@ -15,6 +15,8 @@ import NotFound from "./pages/NotFound";
 import Resume from "./pages/Resume";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
+import AdminPostsList from "./pages/admin/posts/AdminPostsList";
+import AdminPostEditor from "./pages/admin/posts/AdminPostEditor";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Login from "./pages/auth/Login";
 import ResetPassword from "./pages/auth/ResetPassword";
@@ -78,7 +80,9 @@ const App = () => (
               }
             >
               <Route index element={<AdminDashboard />} />
-              <Route path="posts" element={<AdminPlaceholder title="Posts" description="Posts management will be added in Milestone C." />} />
+              <Route path="posts" element={<AdminPostsList />} />
+              <Route path="posts/new" element={<AdminPostEditor />} />
+              <Route path="posts/edit/:id" element={<AdminPostEditor />} />
               <Route path="categories" element={<AdminPlaceholder title="Categories" description="Categories CRUD will be added in Milestone D." />} />
               <Route path="tags" element={<AdminPlaceholder title="Tags" description="Tags CRUD will be added in Milestone D." />} />
               <Route path="media" element={<AdminPlaceholder title="Media Library" description="Media management will be added in Milestone D." />} />
