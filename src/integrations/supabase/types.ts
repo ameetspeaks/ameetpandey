@@ -73,8 +73,8 @@ export type Database = {
           id: string
           impact: Database["public"]["Enums"]["risk_impact_level"] | null
           likelihood:
-            | Database["public"]["Enums"]["risk_likelihood_level"]
-            | null
+          | Database["public"]["Enums"]["risk_likelihood_level"]
+          | null
           management_response: string | null
           owner: string | null
           project_id: string
@@ -98,8 +98,8 @@ export type Database = {
           id?: string
           impact?: Database["public"]["Enums"]["risk_impact_level"] | null
           likelihood?:
-            | Database["public"]["Enums"]["risk_likelihood_level"]
-            | null
+          | Database["public"]["Enums"]["risk_likelihood_level"]
+          | null
           management_response?: string | null
           owner?: string | null
           project_id: string
@@ -123,8 +123,8 @@ export type Database = {
           id?: string
           impact?: Database["public"]["Enums"]["risk_impact_level"] | null
           likelihood?:
-            | Database["public"]["Enums"]["risk_likelihood_level"]
-            | null
+          | Database["public"]["Enums"]["risk_likelihood_level"]
+          | null
           management_response?: string | null
           owner?: string | null
           project_id?: string
@@ -924,8 +924,8 @@ export type Database = {
           id: string
           project_id: string
           remediation_priority:
-            | Database["public"]["Enums"]["priority_level_enum"]
-            | null
+          | Database["public"]["Enums"]["priority_level_enum"]
+          | null
           remediation_required: boolean
           updated_at: string
         }
@@ -941,8 +941,8 @@ export type Database = {
           id?: string
           project_id: string
           remediation_priority?:
-            | Database["public"]["Enums"]["priority_level_enum"]
-            | null
+          | Database["public"]["Enums"]["priority_level_enum"]
+          | null
           remediation_required?: boolean
           updated_at?: string
         }
@@ -958,8 +958,8 @@ export type Database = {
           id?: string
           project_id?: string
           remediation_priority?:
-            | Database["public"]["Enums"]["priority_level_enum"]
-            | null
+          | Database["public"]["Enums"]["priority_level_enum"]
+          | null
           remediation_required?: boolean
           updated_at?: string
         }
@@ -1021,8 +1021,8 @@ export type Database = {
           content_type: string
           created_at: string
           from_status:
-            | Database["public"]["Enums"]["cms_publication_status"]
-            | null
+          | Database["public"]["Enums"]["cms_publication_status"]
+          | null
           id: string
           notes: string | null
           performed_at: string
@@ -1035,8 +1035,8 @@ export type Database = {
           content_type: string
           created_at?: string
           from_status?:
-            | Database["public"]["Enums"]["cms_publication_status"]
-            | null
+          | Database["public"]["Enums"]["cms_publication_status"]
+          | null
           id?: string
           notes?: string | null
           performed_at?: string
@@ -1049,8 +1049,8 @@ export type Database = {
           content_type?: string
           created_at?: string
           from_status?:
-            | Database["public"]["Enums"]["cms_publication_status"]
-            | null
+          | Database["public"]["Enums"]["cms_publication_status"]
+          | null
           id?: string
           notes?: string | null
           performed_at?: string
@@ -1116,8 +1116,8 @@ export type Database = {
           control_id: string
           created_at: string
           effectiveness_rating:
-            | Database["public"]["Enums"]["control_effectiveness_rating_enum"]
-            | null
+          | Database["public"]["Enums"]["control_effectiveness_rating_enum"]
+          | null
           evidence_location: string | null
           gaps_identified: string | null
           id: string
@@ -1136,8 +1136,8 @@ export type Database = {
           control_id: string
           created_at?: string
           effectiveness_rating?:
-            | Database["public"]["Enums"]["control_effectiveness_rating_enum"]
-            | null
+          | Database["public"]["Enums"]["control_effectiveness_rating_enum"]
+          | null
           evidence_location?: string | null
           gaps_identified?: string | null
           id?: string
@@ -1156,8 +1156,8 @@ export type Database = {
           control_id?: string
           created_at?: string
           effectiveness_rating?:
-            | Database["public"]["Enums"]["control_effectiveness_rating_enum"]
-            | null
+          | Database["public"]["Enums"]["control_effectiveness_rating_enum"]
+          | null
           evidence_location?: string | null
           gaps_identified?: string | null
           id?: string
@@ -1191,37 +1191,37 @@ export type Database = {
       }
       control_mappings: {
         Row: {
-          created_at: string
           id: string
-          mapping_notes: string | null
-          mapping_type: Database["public"]["Enums"]["control_mapping_type_enum"]
           source_control_id: string
           target_control_id: string
-          updated_at: string
-          verification_date: string | null
+          mapping_type: Database["public"]["Enums"]["control_mapping_type_enum"]
+          notes: string | null
           verified_by: string | null
+          verification_date: string | null
+          created_at: string | null
+          updated_at: string | null
         }
         Insert: {
-          created_at?: string
           id?: string
-          mapping_notes?: string | null
-          mapping_type: Database["public"]["Enums"]["control_mapping_type_enum"]
           source_control_id: string
           target_control_id: string
-          updated_at?: string
-          verification_date?: string | null
+          mapping_type: Database["public"]["Enums"]["control_mapping_type_enum"]
+          notes?: string | null
           verified_by?: string | null
+          verification_date?: string | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Update: {
-          created_at?: string
           id?: string
-          mapping_notes?: string | null
-          mapping_type?: Database["public"]["Enums"]["control_mapping_type_enum"]
           source_control_id?: string
           target_control_id?: string
-          updated_at?: string
-          verification_date?: string | null
+          mapping_type?: Database["public"]["Enums"]["control_mapping_type_enum"]
+          notes?: string | null
           verified_by?: string | null
+          verification_date?: string | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -1244,7 +1244,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
-          },
+          }
         ]
       }
       downloads: {
@@ -1279,61 +1279,60 @@ export type Database = {
       }
       framework_controls: {
         Row: {
-          applicability_notes: string | null
-          control_description: string
-          control_id: string
-          control_name: string
-          control_type:
-            | Database["public"]["Enums"]["framework_control_type_enum"]
-            | null
-          created_at: string
-          domain_id: string | null
-          framework_id: string
           id: string
+          framework_id: string
+          domain_id: string | null
+          control_id: string
+          name: string
+          description: string
+          control_type: Database["public"]["Enums"]["framework_control_type_enum"] | null
+          control_category: Database["public"]["Enums"]["control_category_enum"] | null
           implementation_guidance: string | null
-          is_mandatory: boolean
-          updated_at: string
+          is_mandatory: boolean | null
+          applicability_notes: string | null
+          testing_procedures: string | null
+          evidence_requirements: string | null
+          common_gaps: string | null
+          created_at: string | null
+          updated_at: string | null
         }
         Insert: {
-          applicability_notes?: string | null
-          control_description: string
-          control_id: string
-          control_name: string
-          control_type?:
-            | Database["public"]["Enums"]["framework_control_type_enum"]
-            | null
-          created_at?: string
-          domain_id?: string | null
-          framework_id: string
           id?: string
+          framework_id: string
+          domain_id?: string | null
+          control_id: string
+          name: string
+          description: string
+          control_type?: Database["public"]["Enums"]["framework_control_type_enum"] | null
+          control_category?: Database["public"]["Enums"]["control_category_enum"] | null
           implementation_guidance?: string | null
-          is_mandatory?: boolean
-          updated_at?: string
+          is_mandatory?: boolean | null
+          applicability_notes?: string | null
+          testing_procedures?: string | null
+          evidence_requirements?: string | null
+          common_gaps?: string | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Update: {
-          applicability_notes?: string | null
-          control_description?: string
-          control_id?: string
-          control_name?: string
-          control_type?:
-            | Database["public"]["Enums"]["framework_control_type_enum"]
-            | null
-          created_at?: string
-          domain_id?: string | null
-          framework_id?: string
           id?: string
+          framework_id?: string
+          domain_id?: string | null
+          control_id?: string
+          name?: string
+          description?: string
+          control_type?: Database["public"]["Enums"]["framework_control_type_enum"] | null
+          control_category?: Database["public"]["Enums"]["control_category_enum"] | null
           implementation_guidance?: string | null
-          is_mandatory?: boolean
-          updated_at?: string
+          is_mandatory?: boolean | null
+          applicability_notes?: string | null
+          testing_procedures?: string | null
+          evidence_requirements?: string | null
+          common_gaps?: string | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "framework_controls_domain_id_fkey"
-            columns: ["domain_id"]
-            isOneToOne: false
-            referencedRelation: "framework_domains"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "framework_controls_framework_id_fkey"
             columns: ["framework_id"]
@@ -1341,41 +1340,48 @@ export type Database = {
             referencedRelation: "frameworks"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "framework_controls_domain_id_fkey"
+            columns: ["domain_id"]
+            isOneToOne: false
+            referencedRelation: "framework_domains"
+            referencedColumns: ["id"]
+          }
         ]
       }
       framework_domains: {
         Row: {
-          created_at: string
-          domain_code: string
-          domain_description: string | null
-          domain_name: string
-          domain_order: number
-          framework_id: string
           id: string
-          parent_domain_id: string | null
-          updated_at: string
+          framework_id: string
+          parent_id: string | null
+          domain_code: string
+          name: string
+          description: string | null
+          sort_order: number | null
+          created_at: string | null
+          updated_at: string | null
         }
         Insert: {
-          created_at?: string
-          domain_code: string
-          domain_description?: string | null
-          domain_name: string
-          domain_order?: number
-          framework_id: string
           id?: string
-          parent_domain_id?: string | null
-          updated_at?: string
+          framework_id: string
+          parent_id?: string | null
+          domain_code: string
+          name: string
+          description?: string | null
+          sort_order?: number | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Update: {
-          created_at?: string
-          domain_code?: string
-          domain_description?: string | null
-          domain_name?: string
-          domain_order?: number
-          framework_id?: string
           id?: string
-          parent_domain_id?: string | null
-          updated_at?: string
+          framework_id?: string
+          parent_id?: string | null
+          domain_code?: string
+          name?: string
+          description?: string | null
+          sort_order?: number | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -1386,92 +1392,143 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "framework_domains_parent_domain_id_fkey"
-            columns: ["parent_domain_id"]
+            foreignKeyName: "framework_domains_parent_id_fkey"
+            columns: ["parent_id"]
             isOneToOne: false
             referencedRelation: "framework_domains"
             referencedColumns: ["id"]
+          }
+        ]
+      }
+      framework_control_references: {
+        Row: {
+          id: string
+          source_control_id: string
+          target_control_id: string
+          reference_type: string
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          source_control_id: string
+          target_control_id: string
+          reference_type: string
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          source_control_id?: string
+          target_control_id?: string
+          reference_type?: string
+          created_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "framework_control_references_source_control_id_fkey"
+            columns: ["source_control_id"]
+            isOneToOne: false
+            referencedRelation: "framework_controls"
+            referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "framework_control_references_target_control_id_fkey"
+            columns: ["target_control_id"]
+            isOneToOne: false
+            referencedRelation: "framework_controls"
+            referencedColumns: ["id"]
+          }
         ]
       }
       frameworks: {
         Row: {
-          certification_available: boolean
-          certification_body: string | null
-          created_at: string
-          description: string
-          documentation_url: string | null
-          framework_code: string | null
-          framework_name: string
-          framework_type: Database["public"]["Enums"]["framework_type_enum"]
           id: string
-          implementation_complexity:
-            | Database["public"]["Enums"]["implementation_complexity_enum"]
-            | null
-          is_active: boolean
-          issuing_organization: string
-          official_website_url: string | null
-          publication_date: string | null
-          purpose: string | null
-          scope: string | null
+          name: string
+          code: string
           slug: string
-          target_industries: string[]
-          target_organization_size: Database["public"]["Enums"]["org_size_enum"][]
-          typical_implementation_time: string | null
-          updated_at: string
+          issuing_organization: string
           version: string | null
+          publication_date: string | null
+          framework_type: Database["public"]["Enums"]["framework_type_enum"]
+          primary_focus_areas: string[] | null
+          description: string
+          purpose_statement: string | null
+          scope: string | null
+          key_benefits: string | null
+          certification_available: boolean | null
+          certification_body: string | null
+          implementation_complexity: Database["public"]["Enums"]["implementation_complexity_enum"] | null
+          typical_implementation_time: string | null
+          target_organization_sizes: string[] | null
+          target_industries: string[] | null
+          official_website_url: string | null
+          documentation_url: string | null
+          purchase_download_url: string | null
+          training_resources_url: string | null
+          is_active: boolean | null
+          is_public: boolean | null
+          is_featured: boolean | null
+          created_at: string | null
+          updated_at: string | null
         }
         Insert: {
-          certification_available?: boolean
-          certification_body?: string | null
-          created_at?: string
-          description: string
-          documentation_url?: string | null
-          framework_code?: string | null
-          framework_name: string
-          framework_type: Database["public"]["Enums"]["framework_type_enum"]
           id?: string
-          implementation_complexity?:
-            | Database["public"]["Enums"]["implementation_complexity_enum"]
-            | null
-          is_active?: boolean
-          issuing_organization: string
-          official_website_url?: string | null
-          publication_date?: string | null
-          purpose?: string | null
-          scope?: string | null
+          name: string
+          code: string
           slug: string
-          target_industries?: string[]
-          target_organization_size?: Database["public"]["Enums"]["org_size_enum"][]
-          typical_implementation_time?: string | null
-          updated_at?: string
+          issuing_organization: string
           version?: string | null
+          publication_date?: string | null
+          framework_type: Database["public"]["Enums"]["framework_type_enum"]
+          primary_focus_areas?: string[] | null
+          description: string
+          purpose_statement?: string | null
+          scope?: string | null
+          key_benefits?: string | null
+          certification_available?: boolean | null
+          certification_body?: string | null
+          implementation_complexity?: Database["public"]["Enums"]["implementation_complexity_enum"] | null
+          typical_implementation_time?: string | null
+          target_organization_sizes?: string[] | null
+          target_industries?: string[] | null
+          official_website_url?: string | null
+          documentation_url?: string | null
+          purchase_download_url?: string | null
+          training_resources_url?: string | null
+          is_active?: boolean | null
+          is_public?: boolean | null
+          is_featured?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Update: {
-          certification_available?: boolean
-          certification_body?: string | null
-          created_at?: string
-          description?: string
-          documentation_url?: string | null
-          framework_code?: string | null
-          framework_name?: string
-          framework_type?: Database["public"]["Enums"]["framework_type_enum"]
           id?: string
-          implementation_complexity?:
-            | Database["public"]["Enums"]["implementation_complexity_enum"]
-            | null
-          is_active?: boolean
-          issuing_organization?: string
-          official_website_url?: string | null
-          publication_date?: string | null
-          purpose?: string | null
-          scope?: string | null
+          name?: string
+          code?: string
           slug?: string
-          target_industries?: string[]
-          target_organization_size?: Database["public"]["Enums"]["org_size_enum"][]
-          typical_implementation_time?: string | null
-          updated_at?: string
+          issuing_organization?: string
           version?: string | null
+          publication_date?: string | null
+          framework_type?: Database["public"]["Enums"]["framework_type_enum"]
+          primary_focus_areas?: string[] | null
+          description?: string
+          purpose_statement?: string | null
+          scope?: string | null
+          key_benefits?: string | null
+          certification_available?: boolean | null
+          certification_body?: string | null
+          implementation_complexity?: Database["public"]["Enums"]["implementation_complexity_enum"] | null
+          typical_implementation_time?: string | null
+          target_organization_sizes?: string[] | null
+          target_industries?: string[] | null
+          official_website_url?: string | null
+          documentation_url?: string | null
+          purchase_download_url?: string | null
+          training_resources_url?: string | null
+          is_active?: boolean | null
+          is_public?: boolean | null
+          is_featured?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -1481,8 +1538,8 @@ export type Database = {
           content_type: Database["public"]["Enums"]["cms_content_type_enum"]
           created_at: string
           device_type:
-            | Database["public"]["Enums"]["analytics_device_type_enum"]
-            | null
+          | Database["public"]["Enums"]["analytics_device_type_enum"]
+          | null
           id: string
           ip_address: string | null
           referrer: string | null
@@ -1495,8 +1552,8 @@ export type Database = {
           content_type: Database["public"]["Enums"]["cms_content_type_enum"]
           created_at?: string
           device_type?:
-            | Database["public"]["Enums"]["analytics_device_type_enum"]
-            | null
+          | Database["public"]["Enums"]["analytics_device_type_enum"]
+          | null
           id?: string
           ip_address?: string | null
           referrer?: string | null
@@ -1509,8 +1566,8 @@ export type Database = {
           content_type?: Database["public"]["Enums"]["cms_content_type_enum"]
           created_at?: string
           device_type?:
-            | Database["public"]["Enums"]["analytics_device_type_enum"]
-            | null
+          | Database["public"]["Enums"]["analytics_device_type_enum"]
+          | null
           id?: string
           ip_address?: string | null
           referrer?: string | null
@@ -1896,8 +1953,8 @@ export type Database = {
         Row: {
           asset_name: string | null
           control_effectiveness:
-            | Database["public"]["Enums"]["control_effectiveness_level"]
-            | null
+          | Database["public"]["Enums"]["control_effectiveness_level"]
+          | null
           created_at: string
           existing_controls: string | null
           id: string
@@ -1923,8 +1980,8 @@ export type Database = {
         Insert: {
           asset_name?: string | null
           control_effectiveness?:
-            | Database["public"]["Enums"]["control_effectiveness_level"]
-            | null
+          | Database["public"]["Enums"]["control_effectiveness_level"]
+          | null
           created_at?: string
           existing_controls?: string | null
           id?: string
@@ -1950,8 +2007,8 @@ export type Database = {
         Update: {
           asset_name?: string | null
           control_effectiveness?:
-            | Database["public"]["Enums"]["control_effectiveness_level"]
-            | null
+          | Database["public"]["Enums"]["control_effectiveness_level"]
+          | null
           created_at?: string
           existing_controls?: string | null
           id?: string
@@ -2095,8 +2152,8 @@ export type Database = {
           notes: string | null
           question: string
           rating:
-            | Database["public"]["Enums"]["vendor_criteria_rating_enum"]
-            | null
+          | Database["public"]["Enums"]["vendor_criteria_rating_enum"]
+          | null
           response: string | null
           risk_level: Database["public"]["Enums"]["project_risk_level"] | null
           updated_at: string
@@ -2110,8 +2167,8 @@ export type Database = {
           notes?: string | null
           question: string
           rating?:
-            | Database["public"]["Enums"]["vendor_criteria_rating_enum"]
-            | null
+          | Database["public"]["Enums"]["vendor_criteria_rating_enum"]
+          | null
           response?: string | null
           risk_level?: Database["public"]["Enums"]["project_risk_level"] | null
           updated_at?: string
@@ -2125,8 +2182,8 @@ export type Database = {
           notes?: string | null
           question?: string
           rating?:
-            | Database["public"]["Enums"]["vendor_criteria_rating_enum"]
-            | null
+          | Database["public"]["Enums"]["vendor_criteria_rating_enum"]
+          | null
           response?: string | null
           risk_level?: Database["public"]["Enums"]["project_risk_level"] | null
           updated_at?: string
@@ -2149,8 +2206,8 @@ export type Database = {
           certifications: Json
           created_at: string
           data_access_level:
-            | Database["public"]["Enums"]["vendor_data_access_level_enum"]
-            | null
+          | Database["public"]["Enums"]["vendor_data_access_level_enum"]
+          | null
           id: string
           overall_risk_rating: Database["public"]["Enums"]["project_risk_level"]
           project_id: string
@@ -2165,8 +2222,8 @@ export type Database = {
           certifications?: Json
           created_at?: string
           data_access_level?:
-            | Database["public"]["Enums"]["vendor_data_access_level_enum"]
-            | null
+          | Database["public"]["Enums"]["vendor_data_access_level_enum"]
+          | null
           id?: string
           overall_risk_rating?: Database["public"]["Enums"]["project_risk_level"]
           project_id: string
@@ -2181,8 +2238,8 @@ export type Database = {
           certifications?: Json
           created_at?: string
           data_access_level?:
-            | Database["public"]["Enums"]["vendor_data_access_level_enum"]
-            | null
+          | Database["public"]["Enums"]["vendor_data_access_level_enum"]
+          | null
           id?: string
           overall_risk_rating?: Database["public"]["Enums"]["project_risk_level"]
           project_id?: string
@@ -2239,152 +2296,152 @@ export type Database = {
     }
     Enums: {
       activity_action_enum:
-        | "create"
-        | "update"
-        | "delete"
-        | "publish"
-        | "unpublish"
-        | "approve"
-        | "reject"
-        | "restore"
+      | "create"
+      | "update"
+      | "delete"
+      | "publish"
+      | "unpublish"
+      | "approve"
+      | "reject"
+      | "restore"
       analytics_device_type_enum: "desktop" | "tablet" | "mobile"
       app_role: "admin" | "moderator" | "user"
       approval_action_enum:
-        | "submit_review"
-        | "approve_publish"
-        | "archive"
-        | "restore"
-        | "reject"
+      | "submit_review"
+      | "approve_publish"
+      | "archive"
+      | "restore"
+      | "reject"
       audit_finding_status_enum:
-        | "open"
-        | "in_progress"
-        | "resolved"
-        | "accepted"
-        | "deferred"
+      | "open"
+      | "in_progress"
+      | "resolved"
+      | "accepted"
+      | "deferred"
       cms_category_type_enum: "project" | "blog" | "resource"
       cms_content_type_enum: "project" | "blog_post" | "policy" | "framework"
       cms_media_file_type_enum: "image" | "document" | "video" | "other"
       cms_publication_status:
-        | "draft"
-        | "under_review"
-        | "published"
-        | "archived"
+      | "draft"
+      | "under_review"
+      | "published"
+      | "archived"
       cms_tag_type_enum:
-        | "framework"
-        | "tool"
-        | "skill"
-        | "industry"
-        | "technology"
+      | "framework"
+      | "tool"
+      | "skill"
+      | "industry"
+      | "technology"
       compliance_status_enum:
-        | "compliant"
-        | "partially_compliant"
-        | "non_compliant"
-        | "not_applicable"
+      | "compliant"
+      | "partially_compliant"
+      | "non_compliant"
+      | "not_applicable"
       control_effectiveness_level:
-        | "ineffective"
-        | "partially_effective"
-        | "effective"
+      | "ineffective"
+      | "partially_effective"
+      | "effective"
       control_effectiveness_rating_enum:
-        | "not_effective"
-        | "partially_effective"
-        | "largely_effective"
-        | "fully_effective"
+      | "not_effective"
+      | "partially_effective"
+      | "largely_effective"
+      | "fully_effective"
       control_implementation_status_enum:
-        | "not_started"
-        | "planned"
-        | "in_progress"
-        | "implemented"
-        | "verified"
-        | "not_applicable"
+      | "not_started"
+      | "planned"
+      | "in_progress"
+      | "implemented"
+      | "verified"
+      | "not_applicable"
       control_mapping_type_enum:
-        | "equivalent"
-        | "similar"
-        | "partial"
-        | "related"
+      | "equivalent"
+      | "similar"
+      | "partial"
+      | "related"
       control_category_enum: "Technical" | "Administrative" | "Physical"
       download_content_type_enum: "project" | "policy" | "resume" | "resource"
       framework_control_type_enum:
-        | "preventive"
-        | "detective"
-        | "corrective"
-        | "compensating"
+      | "preventive"
+      | "detective"
+      | "corrective"
+      | "compensating"
       framework_type_enum:
-        | "security_standard"
-        | "compliance_framework"
-        | "control_framework"
-        | "risk_framework"
-        | "audit_standard"
+      | "security_standard"
+      | "compliance_framework"
+      | "control_framework"
+      | "risk_framework"
+      | "audit_standard"
       implementation_complexity_enum: "low" | "medium" | "high"
       org_size_enum: "startup" | "sme" | "enterprise"
       policy_content_type_enum:
-        | "paragraph"
-        | "numbered_list"
-        | "bullet_list"
-        | "table"
-        | "requirement"
+      | "paragraph"
+      | "numbered_list"
+      | "bullet_list"
+      | "table"
+      | "requirement"
       policy_requirement_type_enum: "shall" | "should" | "may"
       policy_type_enum:
-        | "access_control"
-        | "password"
-        | "data_classification"
-        | "incident_response"
-        | "acceptable_use"
-        | "byod"
-        | "backup"
-        | "encryption"
-        | "remote_access"
-        | "vendor_management"
+      | "access_control"
+      | "password"
+      | "data_classification"
+      | "incident_response"
+      | "acceptable_use"
+      | "byod"
+      | "backup"
+      | "encryption"
+      | "remote_access"
+      | "vendor_management"
       priority_level_enum: "low" | "medium" | "high" | "critical"
       project_data_table_type_enum:
-        | "risk_register"
-        | "asset_inventory"
-        | "threat_analysis"
-        | "control_mapping"
-        | "audit_findings"
-        | "gap_analysis"
-        | "vendor_scorecard"
+      | "risk_register"
+      | "asset_inventory"
+      | "threat_analysis"
+      | "control_mapping"
+      | "audit_findings"
+      | "gap_analysis"
+      | "vendor_scorecard"
       project_risk_level: "low" | "medium" | "high" | "critical"
       project_section_type_enum:
-        | "overview"
-        | "methodology"
-        | "findings"
-        | "analysis"
-        | "recommendations"
-        | "conclusion"
-        | "custom"
+      | "overview"
+      | "methodology"
+      | "findings"
+      | "analysis"
+      | "recommendations"
+      | "conclusion"
+      | "custom"
       project_type_enum:
-        | "risk_assessment"
-        | "it_audit"
-        | "vendor_assessment"
-        | "compliance_mapping"
-        | "policy_development"
-        | "framework_implementation"
+      | "risk_assessment"
+      | "it_audit"
+      | "vendor_assessment"
+      | "compliance_mapping"
+      | "policy_development"
+      | "framework_implementation"
       risk_entry_status_enum:
-        | "identified"
-        | "in_progress"
-        | "mitigated"
-        | "accepted"
-        | "transferred"
+      | "identified"
+      | "in_progress"
+      | "mitigated"
+      | "accepted"
+      | "transferred"
       risk_impact_level: "low" | "medium" | "high"
       risk_likelihood_level: "low" | "medium" | "high"
       vendor_criteria_category_enum:
-        | "data_protection"
-        | "access_control"
-        | "incident_response"
-        | "compliance"
-        | "business_continuity"
-        | "physical_security"
+      | "data_protection"
+      | "access_control"
+      | "incident_response"
+      | "compliance"
+      | "business_continuity"
+      | "physical_security"
       vendor_criteria_rating_enum:
-        | "compliant"
-        | "partially_compliant"
-        | "non_compliant"
-        | "not_applicable"
+      | "compliant"
+      | "partially_compliant"
+      | "non_compliant"
+      | "not_applicable"
       vendor_data_access_level_enum:
-        | "none"
-        | "public"
-        | "internal"
-        | "confidential"
-        | "restricted"
+      | "none"
+      | "public"
+      | "internal"
+      | "confidential"
+      | "restricted"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -2398,116 +2455,116 @@ type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
-    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof DatabaseWithoutInternals },
+  | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+  | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
-    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+  ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+    DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+  : never = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
   ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+    DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
-    ? R
-    : never
+  ? R
+  : never
   : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
-      }
-      ? R
-      : never
-    : never
+    DefaultSchema["Views"])
+  ? (DefaultSchema["Tables"] &
+    DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+      Row: infer R
+    }
+  ? R
+  : never
+  : never
 
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
+  | keyof DefaultSchema["Tables"]
+  | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+  ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+  : never = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
-    }
-    ? I
-    : never
+    Insert: infer I
+  }
+  ? I
+  : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
-      }
-      ? I
-      : never
-    : never
+  ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+    Insert: infer I
+  }
+  ? I
+  : never
+  : never
 
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
+  | keyof DefaultSchema["Tables"]
+  | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+  ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+  : never = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
-    }
-    ? U
-    : never
+    Update: infer U
+  }
+  ? U
+  : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
-    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
-      }
-      ? U
-      : never
-    : never
+  ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+    Update: infer U
+  }
+  ? U
+  : never
+  : never
 
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
+  | keyof DefaultSchema["Enums"]
+  | { schema: keyof DatabaseWithoutInternals },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
-    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+  ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+  : never = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
   ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
-    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
+  ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+  : never
 
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof DatabaseWithoutInternals },
+  | keyof DefaultSchema["CompositeTypes"]
+  | { schema: keyof DatabaseWithoutInternals },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
-    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+  ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+  : never = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
   ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
-    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
+  ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+  : never
 
 export const Constants = {
   public: {
@@ -2553,6 +2610,12 @@ export const Constants = {
         "skill",
         "industry",
         "technology",
+      ],
+      control_category_enum: [
+        "administrative",
+        "technical",
+        "physical",
+        "management",
       ],
       compliance_status_enum: [
         "compliant",
