@@ -1,53 +1,93 @@
+import { BarChart3, Building2, ClipboardCheck, ShieldAlert } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const highlights = [
+const expertiseCards = [
   {
-    title: "Governance",
-    description: "Cybersecurity strategy, policy alignment, and leadership-ready reporting.",
+    title: "Risk Assessment",
+    description: "Identifying and evaluating security risks using ISO 27001 and NIST frameworks",
+    to: "/grc-projects/risk-assessments",
+    icon: ShieldAlert,
   },
   {
-    title: "Risk",
-    description: "Structured risk assessments with prioritized treatment plans and measurable outcomes.",
+    title: "Security Compliance",
+    description: "Mapping controls to SOC 2, ISO 27001, and regulatory requirements",
+    to: "/grc-projects/compliance",
+    icon: ClipboardCheck,
   },
   {
-    title: "Compliance",
-    description: "Audit-ready control mapping across ISO 27001, NIST, and SOC-aligned programs.",
+    title: "IT Audit",
+    description: "Conducting control testing and audit evidence collection",
+    to: "/grc-projects/audit-reports",
+    icon: BarChart3,
+  },
+  {
+    title: "Vendor Risk Management",
+    description: "Assessing third-party security posture and managing vendor risks",
+    to: "/grc-projects/vendor-assessments",
+    icon: Building2,
   },
 ];
 
 const Index = () => {
   return (
-    <section className="page-shell">
-      <div className="site-container space-y-10">
-        <div className="space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">AmeetPandey.in</p>
-          <h1 className="text-4xl leading-tight sm:text-5xl">Cybersecurity GRC Portfolio</h1>
-          <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
-            A professional portfolio showcasing governance, risk, and compliance work focused on resilient security
-            programs and business-aligned outcomes.
-          </p>
-          <div>
-            <Link
-              to="/grc-projects"
-              className="inline-flex rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft hover:bg-primary/90"
-            >
-              Explore GRC Projects
-            </Link>
+    <>
+      <section className="hero-gradient">
+        <div className="site-container py-20 sm:py-24">
+          <div className="mx-auto max-w-3xl space-y-6 text-center text-primary-foreground">
+            <h1 className="text-4xl font-extrabold leading-tight text-primary-foreground sm:text-5xl">
+              Cybersecurity Governance, Risk &amp; Compliance Analyst
+            </h1>
+            <p className="text-base leading-7 text-primary-foreground/90 sm:text-lg">
+              Focused on risk assessment, compliance frameworks, IT auditing, and security governance
+            </p>
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                to="/grc-projects"
+                className="inline-flex rounded-md bg-background px-5 py-2.5 text-sm font-semibold text-primary shadow-elevated hover:opacity-90"
+              >
+                View GRC Projects
+              </Link>
+              <a
+                href="/resume.pdf"
+                download
+                className="inline-flex rounded-md border border-primary-foreground/40 bg-transparent px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary-foreground/10"
+              >
+                Download Resume
+              </a>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          {highlights.map((item) => (
-            <article key={item.title} className="surface-card p-6">
-              <h2 className="text-lg">{item.title}</h2>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
-            </article>
-          ))}
+      <section className="page-shell bg-secondary/50">
+        <div className="site-container space-y-8">
+          <div className="text-center">
+            <h2 className="text-3xl">Core Expertise</h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            {expertiseCards.map((card) => (
+              <article
+                key={card.title}
+                className="surface-card h-full p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-accent"
+              >
+                <div className="mb-4 inline-flex rounded-lg bg-secondary p-3 text-accent">
+                  <card.icon className="h-6 w-6" aria-hidden="true" />
+                </div>
+                <h3 className="text-xl">{card.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{card.description}</p>
+                <Link to={card.to} className="mt-4 inline-flex text-sm font-semibold text-primary hover:text-accent">
+                  View details →
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
 export default Index;
+
 
