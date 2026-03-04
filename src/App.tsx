@@ -9,12 +9,15 @@ import Contact from "./pages/Contact";
 import Frameworks from "./pages/Frameworks";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import GRCProjects from "./pages/grc/GRCProjects";
+import Resume from "./pages/Resume";
+import ProjectISO27001RiskAssessment from "./pages/projects/ProjectISO27001RiskAssessment";
+import ProjectITAuditReport from "./pages/projects/ProjectITAuditReport";
+import ProjectVendorSecurityAssessment from "./pages/projects/ProjectVendorSecurityAssessment";
 import AuditReports from "./pages/grc/AuditReports";
 import Compliance from "./pages/grc/Compliance";
+import GRCProjects from "./pages/grc/GRCProjects";
 import RiskAssessments from "./pages/grc/RiskAssessments";
 import VendorAssessments from "./pages/grc/VendorAssessments";
-import Resume from "./pages/Resume";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,9 @@ const App = () => (
             <Route path="grc-projects/audit-reports" element={<AuditReports />} />
             <Route path="grc-projects/compliance" element={<Compliance />} />
             <Route path="grc-projects/vendor-assessments" element={<VendorAssessments />} />
+            <Route path="projects/iso27001-risk-assessment" element={<ProjectISO27001RiskAssessment />} />
+            <Route path="projects/it-audit-report" element={<ProjectITAuditReport />} />
+            <Route path="projects/vendor-security-assessment" element={<ProjectVendorSecurityAssessment />} />
             <Route path="frameworks" element={<Frameworks />} />
             <Route path="resume" element={<Resume />} />
             <Route path="contact" element={<Contact />} />
@@ -45,4 +51,5 @@ const App = () => (
 );
 
 export default App;
+
 
