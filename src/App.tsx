@@ -31,15 +31,10 @@ import Compliance from "./pages/grc/Compliance";
 import GRCProjects from "./pages/grc/GRCProjects";
 import RiskAssessments from "./pages/grc/RiskAssessments";
 import VendorAssessments from "./pages/grc/VendorAssessments";
-import AccessControlPolicyPage from "./pages/policies/AccessControlPolicyPage";
-import DataClassificationPolicyPage from "./pages/policies/DataClassificationPolicyPage";
-import IncidentResponsePolicyPage from "./pages/policies/IncidentResponsePolicyPage";
-import PasswordPolicyPage from "./pages/policies/PasswordPolicyPage";
+import PolicyDetailPage from "./pages/policies/PolicyDetailPage";
 import BlogHome from "./pages/blog/BlogHome";
 import BlogPost from "./pages/blog/BlogPost";
-import ProjectISO27001RiskAssessment from "./pages/projects/ProjectISO27001RiskAssessment";
-import ProjectITAuditReport from "./pages/projects/ProjectITAuditReport";
-import ProjectVendorSecurityAssessment from "./pages/projects/ProjectVendorSecurityAssessment";
+import ProjectDetail from "./pages/projects/ProjectDetail";
 
 const queryClient = new QueryClient();
 
@@ -59,16 +54,11 @@ const App = () => (
               <Route path="grc-projects/audit-reports" element={<AuditReports />} />
               <Route path="grc-projects/compliance" element={<Compliance />} />
               <Route path="grc-projects/vendor-assessments" element={<VendorAssessments />} />
-              <Route path="projects/iso27001-risk-assessment" element={<ProjectISO27001RiskAssessment />} />
-              <Route path="projects/it-audit-report" element={<ProjectITAuditReport />} />
-              <Route path="projects/vendor-security-assessment" element={<ProjectVendorSecurityAssessment />} />
+              <Route path="projects/:slug" element={<ProjectDetail />} />
               <Route path="frameworks" element={<Frameworks />} />
               <Route path="blog" element={<BlogHome />} />
               <Route path="blog/:slug" element={<BlogPost />} />
-              <Route path="policies/access-control" element={<AccessControlPolicyPage />} />
-              <Route path="policies/password" element={<PasswordPolicyPage />} />
-              <Route path="policies/data-classification" element={<DataClassificationPolicyPage />} />
-              <Route path="policies/incident-response" element={<IncidentResponsePolicyPage />} />
+              <Route path="policies/:slug" element={<PolicyDetailPage />} />
               <Route path="resume" element={<Resume />} />
               <Route path="contact" element={<Contact />} />
             </Route>
