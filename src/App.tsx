@@ -23,6 +23,19 @@ import AdminMedia from "./pages/admin/media/AdminMedia";
 import AdminSettings from "./pages/admin/settings/AdminSettings";
 import AdminSubscribers from "./pages/admin/subscribers/AdminSubscribers";
 import AdminTags from "./pages/admin/tags/AdminTags";
+import AdminProjectsList from "./pages/admin/projects/AdminProjectsList";
+import AdminProjectEditor from "./pages/admin/projects/AdminProjectEditor";
+import AdminProjectAnalytics from "./pages/admin/projects/AdminProjectAnalytics";
+import AdminPoliciesList from "./pages/admin/policies/AdminPoliciesList";
+import AdminPolicyEditor from "./pages/admin/policies/AdminPolicyEditor";
+import AdminPolicyRequirements from "./pages/admin/policies/AdminPolicyRequirements";
+import AdminPolicyReviews from "./pages/admin/policies/AdminPolicyReviews";
+import AdminFrameworksList from "./pages/admin/frameworks/AdminFrameworksList";
+import AdminFrameworkEditor from "./pages/admin/frameworks/AdminFrameworkEditor";
+import AdminFrameworkDomains from "./pages/admin/frameworks/AdminFrameworkDomains";
+import AdminFrameworkControls from "./pages/admin/frameworks/AdminFrameworkControls";
+import AdminControlMappings from "./pages/admin/frameworks/AdminControlMappings";
+import AdminImplementationTracker from "./pages/admin/frameworks/AdminImplementationTracker";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Login from "./pages/auth/Login";
 import ResetPassword from "./pages/auth/ResetPassword";
@@ -76,6 +89,22 @@ const App = () => (
               }
             >
               <Route index element={<AdminDashboard />} />
+              <Route path="projects" element={<AdminProjectsList />} />
+              <Route path="projects/new" element={<AdminProjectEditor />} />
+              <Route path="projects/edit/:id" element={<AdminProjectEditor />} />
+              <Route path="projects/analytics" element={<AdminProjectAnalytics />} />
+              <Route path="policies" element={<AdminPoliciesList />} />
+              <Route path="policies/new" element={<AdminPolicyEditor />} />
+              <Route path="policies/requirements" element={<AdminPolicyRequirements />} />
+              <Route path="policies/reviews" element={<AdminPolicyReviews />} />
+              <Route path="policies/edit/:id" element={<AdminPolicyEditor />} />
+              <Route path="frameworks" element={<AdminFrameworksList />} />
+              <Route path="frameworks/new" element={<AdminFrameworkEditor />} />
+              <Route path="frameworks/edit/:id" element={<AdminFrameworkEditor />} />
+              <Route path="frameworks/domains" element={<AdminFrameworkDomains />} />
+              <Route path="frameworks/controls" element={<AdminFrameworkControls />} />
+              <Route path="frameworks/mappings" element={<AdminControlMappings />} />
+              <Route path="frameworks/tracker" element={<AdminImplementationTracker />} />
               <Route path="posts" element={<AdminPostsList />} />
               <Route path="posts/new" element={<AdminPostEditor />} />
               <Route path="posts/edit/:id" element={<AdminPostEditor />} />

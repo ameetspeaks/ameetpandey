@@ -38,8 +38,8 @@ All colors MUST be HSL.
     --input: 220 13% 90%;
     --ring: 175 84% 31%;
 
-    --radius: 0.625rem;
-    --hero-gradient: linear-gradient(120deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --radius: 0.75rem;
+    --hero-gradient: linear-gradient(135deg, hsl(var(--primary) / 0.95) 0%, hsl(var(--accent) / 0.85) 100%);
 
     --risk-high-bg: 0 78% 96%;
     --risk-high-fg: 0 70% 42%;
@@ -145,14 +145,14 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans text-base antialiased;
+    @apply bg-background text-foreground font-sans text-base antialiased transition-colors duration-300;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-bold tracking-tight text-foreground;
+    @apply font-heading font-bold tracking-tight text-foreground;
   }
 
   a {
@@ -182,7 +182,7 @@ All colors MUST be HSL.
   }
 
   .surface-card {
-    @apply rounded-xl border border-border bg-card shadow-soft;
+    @apply rounded-xl border border-white/10 dark:border-white/5 bg-card/70 backdrop-blur-xl shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated hover:bg-card/90;
   }
 
   .data-table-wrap {

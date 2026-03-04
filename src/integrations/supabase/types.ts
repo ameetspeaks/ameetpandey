@@ -2301,6 +2301,7 @@ export type Database = {
         | "similar"
         | "partial"
         | "related"
+      control_category_enum: "Technical" | "Administrative" | "Physical"
       download_content_type_enum: "project" | "policy" | "resume" | "resource"
       framework_control_type_enum:
         | "preventive"

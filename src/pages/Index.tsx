@@ -1,5 +1,7 @@
 import { BarChart3, Building2, ClipboardCheck, ShieldAlert } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const expertiseCards = [
   {
@@ -29,6 +31,24 @@ const expertiseCards = [
 ];
 
 const Index = () => {
+  const { data: latestPosts, isLoading } = useQuery({
+    queryKey: ["latest_blog_posts"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("id, title, slug, excerpt, published_date, featured_image_url")
+        .eq("status", "published")
+        .order("published_date", { ascending: false })
+        .limit(3);
+
+      if (error) {
+        console.error("Error fetching latest posts:", error);
+        return [];
+      }
+      return data || [];
+    },
+  });
+
   return (
     <>
       <section className="hero-gradient">
@@ -95,21 +115,37 @@ const Index = () => {
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
-            {[1, 2, 3].map((post) => (
-              <article key={post} className="surface-card overflow-hidden">
-                <div className="aspect-[16/9] bg-secondary" />
-                <div className="space-y-3 p-4">
-                  <p className="text-xs text-muted-foreground">Coming soon</p>
-                  <h3 className="text-lg">Technical Blog Post Placeholder {post}</h3>
-                  <p className="line-clamp-2 text-sm text-muted-foreground">
-                    This card will render real published blog content in Milestone B.
-                  </p>
-                  <Link to="/blog" className="inline-flex text-sm font-semibold text-primary hover:text-accent">
-                    Read more →
-                  </Link>
-                </div>
-              </article>
-            ))}
+            {isLoading ? (
+              <p className="col-span-3 text-center text-sm text-muted-foreground">Loading latest insights...</p>
+            ) : latestPosts && latestPosts.length > 0 ? (
+              latestPosts.map((post) => (
+                <article key={post.id} className="surface-card flex flex-col overflow-hidden">
+                  <div className="aspect-[16/9] w-full bg-secondary">
+                    {post.featured_image_url ? (
+                      <img src={post.featured_image_url} alt={post.title} className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-secondary/80 text-muted-foreground">No image available</div>
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col space-y-3 p-4">
+                    {post.published_date && (
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(post.published_date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                      </p>
+                    )}
+                    <h3 className="line-clamp-2 text-lg font-semibold">{post.title}</h3>
+                    <p className="line-clamp-2 flex-1 text-sm text-muted-foreground">
+                      {post.excerpt || "Read full article to learn more."}
+                    </p>
+                    <Link to={`/blog/${post.slug}`} className="inline-flex text-sm font-semibold text-primary hover:text-accent mt-2">
+                      Read more →
+                    </Link>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <p className="col-span-3 text-center text-sm text-muted-foreground">No posts published yet.</p>
+            )}
           </div>
         </div>
       </section>
