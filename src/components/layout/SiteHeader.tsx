@@ -78,6 +78,9 @@ const SiteHeader = () => {
               )}
             </div>
 
+            <NavLink to="/blog" className={getLinkClass}>
+              Blog
+            </NavLink>
             <NavLink to="/frameworks" className={getLinkClass}>
               Frameworks
             </NavLink>
@@ -122,6 +125,9 @@ const SiteHeader = () => {
               </div>
             )}
 
+            <NavLink to="/blog" className={getLinkClass} onClick={() => setMobileOpen(false)}>
+              Blog
+            </NavLink>
             <NavLink to="/frameworks" className={getLinkClass} onClick={() => setMobileOpen(false)}>
               Frameworks
             </NavLink>

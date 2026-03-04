@@ -84,6 +84,35 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <section className="page-shell">
+        <div className="site-container space-y-6">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-3xl">Latest Security Insights</h2>
+            <Link to="/blog" className="text-sm font-semibold text-primary hover:text-accent">
+              View All Posts →
+            </Link>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {[1, 2, 3].map((post) => (
+              <article key={post} className="surface-card overflow-hidden">
+                <div className="aspect-[16/9] bg-secondary" />
+                <div className="space-y-3 p-4">
+                  <p className="text-xs text-muted-foreground">Coming soon</p>
+                  <h3 className="text-lg">Technical Blog Post Placeholder {post}</h3>
+                  <p className="line-clamp-2 text-sm text-muted-foreground">
+                    This card will render real published blog content in Milestone B.
+                  </p>
+                  <Link to="/blog" className="inline-flex text-sm font-semibold text-primary hover:text-accent">
+                    Read more →
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 };
