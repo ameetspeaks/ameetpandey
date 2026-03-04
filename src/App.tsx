@@ -10,6 +10,10 @@ import Frameworks from "./pages/Frameworks";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Resume from "./pages/Resume";
+import AccessControlPolicyPage from "./pages/policies/AccessControlPolicyPage";
+import DataClassificationPolicyPage from "./pages/policies/DataClassificationPolicyPage";
+import IncidentResponsePolicyPage from "./pages/policies/IncidentResponsePolicyPage";
+import PasswordPolicyPage from "./pages/policies/PasswordPolicyPage";
 import ProjectISO27001RiskAssessment from "./pages/projects/ProjectISO27001RiskAssessment";
 import ProjectITAuditReport from "./pages/projects/ProjectITAuditReport";
 import ProjectVendorSecurityAssessment from "./pages/projects/ProjectVendorSecurityAssessment";
@@ -40,6 +44,10 @@ const App = () => (
             <Route path="projects/it-audit-report" element={<ProjectITAuditReport />} />
             <Route path="projects/vendor-security-assessment" element={<ProjectVendorSecurityAssessment />} />
             <Route path="frameworks" element={<Frameworks />} />
+            <Route path="policies/access-control" element={<AccessControlPolicyPage />} />
+            <Route path="policies/password" element={<PasswordPolicyPage />} />
+            <Route path="policies/data-classification" element={<DataClassificationPolicyPage />} />
+            <Route path="policies/incident-response" element={<IncidentResponsePolicyPage />} />
             <Route path="resume" element={<Resume />} />
             <Route path="contact" element={<Contact />} />
           </Route>
