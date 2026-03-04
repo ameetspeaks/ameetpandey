@@ -1,132 +1,109 @@
 
-Implementation Plan: Medium-Style Blog Platform (Prompts 9–11)
+Implementation plan to convert the portfolio to a fully database-driven CMS (while keeping existing blog module unchanged, additive/safe rollout, single-admin self-approval, and versioning on all content tables).
 
-1) Current State Snapshot (from codebase)
-- Frontend already has portfolio pages, policies, resume, and contact form.
-- No blog routes/components yet (`/blog` is linked in Contact but route does not exist).
-- No auth system exists yet (no `supabase.auth` usage).
-- Supabase currently has only `contact_submissions`.
-- Confirmed decisions:
-  - User profiles: Yes
-  - Admin model: Single-admin
-  - Comments: Enabled
-  - Newsletter: Capture + integration placeholders
+1) Review Summary (current state)
+- Blog/admin module is already database-driven (`blog_*` tables + admin CRUD).
+- Non-blog content is still static/hardcoded:
+  - Projects/case studies (`/grc-projects`, `/projects/*`)
+  - Frameworks (`/frameworks`)
+  - Policies (`/policies/*` + static PDFs)
+  - Some GRC subpages are placeholders.
+- Existing auth/RBAC foundation is good (`profiles`, `user_roles`, `has_role()`).
+- Therefore: add a new non-blog CMS data layer and migrate frontend routes to query Supabase.
 
-2) Delivery Strategy
-- Build in 3 phases aligned to your prompts, but with an auth/security foundation first.
-- Keep public blog and admin CRM separated:
-  - Public: `/blog`, `/blog/:slug`
-  - Protected: `/admin/*` with role checks
-- Use incremental releases so each phase is testable and production-safe.
+2) Architecture Decisions Applied
+- Keep blog untouched (no breaking refactor of `blog_*` tables).
+- Additive migration: introduce new tables for portfolio/GRC/policies/frameworks.
+- Approval workflow: `draft -> under_review -> published -> archived`, self-approval allowed for admin.
+- Version all tables: implement generic version + activity logging with trigger-based snapshots.
+- Security correction: do NOT create a `users` table with roles; continue using `profiles` + `user_roles` (separate roles table).
 
-3) Phase 0 (Foundation required before Prompt 10)
-A. Authentication + authorization
-- Implement Supabase auth pages/flows: login, forgot password, reset password route.
-- Create role system in separate table (secure pattern):
-  - `app_role` enum
-  - `user_roles` table
-  - `has_role()` security definer function
-- Single-admin bootstrap: first configured user gets `admin` role via migration seed path.
-- Add protected route wrapper for `/admin/*` using server-validated role checks.
+3) Database Design (safe namespace strategy)
+To avoid collisions with existing blog tables and preserve safe rollout:
+- Core non-blog tables (as requested, same concepts):
+  - `projects`, `project_sections`, `project_data_tables`
+  - `risk_register_entries`, `audit_findings`
+  - `vendor_assessments`, `vendor_assessment_criteria`
+  - `security_policies`, `policy_sections`, `policy_requirements`
+  - `frameworks`, `framework_domains`, `framework_controls`, `control_mappings`
+  - `control_implementations`, `compliance_mappings`
+- Shared supporting tables (non-blog scope):
+  - `cms_categories`, `cms_tags`, `cms_content_tags`, `cms_media`
+- Governance/audit/version:
+  - `activity_log`
+  - `content_versions` (generic: `content_type`, `content_id`, `version_number`, `content_snapshot`)
+  - `content_approvals` (optional but recommended for explicit review actions even in single-admin mode)
+- Analytics:
+  - `page_views`, `downloads` (for projects/policies/frameworks)
+- Link actor fields to `profiles(id)` where needed (`created_by`, `reviewed_by`, `approved_by`, `changed_by`).
 
-B. Profiles (required by your decision)
-- Create `profiles` table linked to `auth.users(id)` (cascade delete).
-- Trigger to auto-create profile on signup.
-- RLS: user reads/updates own profile; admin can read all as needed.
+4) Validation, Automation, and Data Integrity
+- Add trigger functions for:
+  - slug generation/normalization
+  - enum/status transitions and publish date handling
+  - risk score/risk level calculation
+  - updated_at maintenance
+  - structured JSON shape checks for rich sections/tables
+- Add server-side guards (trigger-level) for max lengths and required fields.
+- Add public insert protections (if any public endpoints are introduced) via strict `WITH CHECK`.
+- Add indexes exactly on high-query fields (slug, status, type, published_date, foreign keys).
 
-4) Phase 1 (Prompt 9: Blog Frontend & Reading Experience)
-A. Data model (public-facing core)
-- Create: `blog_posts`, `blog_categories`, `blog_tags`, `blog_post_tags`, `blog_subscribers`, `blog_post_views`.
-- Add `slug` uniqueness + indexes for slug/date/status/category.
-- Store rich content as structured JSON blocks (supports terminal/image/callout/table blocks cleanly).
+5) RLS & Access Model
+- Public read: only `published + is_active` content for projects/policies/frameworks and their sections.
+- Admin manage: full CRUD via `has_role(auth.uid(), 'admin')`.
+- Version/audit tables: admin read/write only.
+- No recursive RLS patterns; role checks only through `has_role()`.
 
-B. Public blog UI
-- `/blog`: hero, featured post, searchable latest grid, category tabs, sidebar widgets, pagination.
-- `/blog/:slug`: full article layout, reading progress bar, share actions, related posts, prev/next nav.
-- Add responsive reading typography + content block renderers (terminal, callout, gallery, code with copy).
+6) Frontend Migration Plan (no downtime)
+Phase A: Data access layer
+- Add typed query modules/hooks for each content type (projects, policies, frameworks).
+- Keep existing static pages functional until dynamic pages are ready.
 
-C. SEO
-- Add page-level meta/OG/Twitter/canonical tags.
-- Add article JSON-LD schema.
-- Ensure image alt text handling and semantic heading structure.
+Phase B: Public dynamic pages
+- Convert:
+  - `/grc-projects` and `/projects/*` to DB-backed listing/details
+  - `/frameworks` to DB-backed framework cards + comparison + linked controls
+  - `/policies/*` to DB-backed policy document rendering (replace hardcoded sections/PDF dependency)
+- Maintain existing URLs; map old routes to slug-based loaders.
 
-5) Phase 2 (Prompt 10: Admin CRM & Editor)
-A. Admin shell
-- `/admin` layout with sidebar nav and protected routes.
-- Dashboard cards + charts using existing chart stack (`recharts` already installed).
+Phase C: Admin CMS expansion
+- Add admin modules:
+  - Projects CRUD with section/table editors
+  - Risk register editor
+  - Audit findings editor
+  - Vendor assessment + criteria editor
+  - Policies + policy sections + requirements editor
+  - Frameworks/domains/controls/mappings editor
+  - Compliance/implementation tracker
+  - Shared categories/tags/media manager for non-blog content
+- Add publish/review actions and revision timeline per record.
 
-B. Posts management
-- `/admin/posts`: filters, search, sort, bulk actions, status management, duplication, soft delete.
-- `/admin/posts/new` + `/admin/posts/edit/:id`: 2-column editor + settings panels.
+Phase D: Approval + accuracy workflows
+- Implement status transitions and action buttons:
+  - Submit for review / Approve & publish / Archive / Restore
+- Add “accuracy checklist” fields + verification metadata (review notes, approval date, reviewer).
+- Add compare-and-restore UI from `content_versions`.
 
-C. Rich editor
-- Implement block-based editor (headings, lists, code, terminal block, callouts, images/video/table).
-- Auto-save every 30s, save state indicator, manual save, draft/publish/schedule states.
-- Revision capture table for version history and restore.
+7) Static-to-Database Content Migration
+- Create one-time migration scripts to seed current static content into new tables:
+  - case study data arrays -> `project_sections`, `risk_register_entries`, etc.
+  - policy sections -> `policy_sections`
+  - frameworks comparison -> `frameworks/domains/controls` seed baseline
+- After parity validation, remove hardcoded content from page components.
 
-6) Phase 3 (Prompt 11: Advanced CRUD & Operations)
-A. Admin modules
-- Categories CRUD (`/admin/categories`) with hierarchy + sort order.
-- Tags CRUD + merge workflow (`/admin/tags`).
-- Media library (`/admin/media`) with upload, metadata, usage count.
-- Comments moderation (`/admin/comments`).
-- Subscribers management (`/admin/subscribers`).
-- Analytics page (`/admin/analytics`) using tracked events.
+8) QA & Release Gates
+- Gate 1: schema + RLS + triggers validated with sample CRUD.
+- Gate 2: dynamic public pages match current content and URL behavior.
+- Gate 3: admin CRUD + publish workflow + version restore works for each module.
+- Gate 4: audit log and version entries generated on every change.
+- Gate 5: final regression on blog module (must remain unaffected).
 
-B. Settings
-- `/admin/settings`: blog defaults, SEO defaults, social links, reading options, moderation toggles.
-- Newsletter integration placeholders only (capture + export + connector-ready hooks).
+9) Deliverables Sequence (recommended)
+1. Schema + RLS + triggers + indexes
+2. Shared hooks/repositories
+3. Projects module (public + admin)
+4. Policies module (public + admin)
+5. Frameworks/compliance module (public + admin)
+6. Versioning/activity UI + migration completion + cleanup
 
-7) Security & RLS Plan
-- Public read policies only for published + active posts/categories/tags.
-- Admin write/read policies gated by `has_role(auth.uid(), 'admin')`.
-- Comments/subscribers public insert allowed with strict validation.
-- Rate-limit strategy:
-  - DB validation triggers for comments/subscribers
-  - optional edge-function throttling for public write endpoints
-- Input validation:
-  - Client: Zod schemas
-  - Server: trigger validation on critical public-write tables
-
-8) Supabase Technical Details (planned schema)
-- Core tables:
-  - `profiles`, `user_roles`
-  - `blog_posts`, `blog_post_revisions`
-  - `blog_categories`, `blog_tags`, `blog_post_tags`
-  - `blog_media`
-  - `blog_comments`
-  - `blog_subscribers`
-  - `blog_analytics_events`
-- Storage:
-  - Public bucket for optimized blog media variants
-  - RLS on `storage.objects` scoped to admin writes, public reads where needed
-
-9) Frontend Integration Updates
-- Navigation:
-  - Add “Blog” to header/footer (desktop + mobile)
-  - Keep separate admin navigation in `/admin` shell
-- Homepage:
-  - Add “Latest Security Insights” section (3 recent posts + CTA)
-- Existing pages remain unchanged except link consistency and shared style tokens.
-
-10) Known Constraints / Decisions
-- Newsletter sending is not implemented as native marketing email in Lovable auth email tooling.
-- Phase 1 will implement subscriber capture, export, and integration-ready architecture.
-- Since prompts are large, implementation will be split into scoped milestones to avoid regressions.
-
-11) Execution Milestones
-- Milestone A: Auth + roles + profiles + protected admin shell
-- Milestone B: Public blog list/detail + SEO + view tracking
-- Milestone C: Admin posts CRUD + editor + autosave + revisions
-- Milestone D: Categories/tags/media/comments/subscribers/analytics/settings
-- Milestone E: Final QA (desktop/mobile), security verification, and end-to-end flow tests
-
-12) End-to-End Test Plan (must pass before completion)
-- Create/edit/publish/schedule post flow
-- Terminal/image/callout block rendering on `/blog/:slug`
-- Category/tag/search filters and pagination
-- Media upload + reuse in editor
-- Comments submission + moderation lifecycle
-- SEO tags/schema verification in page source
-- Admin route protection and role enforcement
-- Mobile reading and admin usability checks
+This approach gives you a true enterprise CMS model for all portfolio/GRC content, with auditability and controlled publishing, without destabilizing the already-working blog system.
