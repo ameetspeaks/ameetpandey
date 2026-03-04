@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -59,6 +59,20 @@ All colors MUST be HSL.
 
     --shadow-soft: 0 12px 30px -20px hsl(var(--primary) / 0.35);
     --shadow-elevated: 0 16px 40px -26px hsl(var(--primary) / 0.45);
+
+    --terminal-bg: 220 22% 12%;
+    --terminal-fg: 210 40% 98%;
+    --terminal-command: 142 76% 68%;
+    --terminal-output: 210 40% 85%;
+
+    --callout-info-bg: 210 100% 97%;
+    --callout-info-fg: 221 83% 30%;
+    --callout-warning-bg: 45 100% 95%;
+    --callout-warning-fg: 32 95% 30%;
+    --callout-tip-bg: 142 70% 95%;
+    --callout-tip-fg: 152 72% 24%;
+    --callout-danger-bg: 0 95% 96%;
+    --callout-danger-fg: 0 74% 36%;
   }
 
   .dark {
@@ -108,6 +122,20 @@ All colors MUST be HSL.
 
     --shadow-soft: 0 14px 36px -20px hsl(var(--accent) / 0.3);
     --shadow-elevated: 0 20px 50px -28px hsl(var(--accent) / 0.42);
+
+    --terminal-bg: 222 26% 10%;
+    --terminal-fg: 210 40% 98%;
+    --terminal-command: 142 76% 70%;
+    --terminal-output: 210 35% 85%;
+
+    --callout-info-bg: 221 40% 18%;
+    --callout-info-fg: 210 80% 84%;
+    --callout-warning-bg: 35 42% 18%;
+    --callout-warning-fg: 40 95% 84%;
+    --callout-tip-bg: 152 34% 18%;
+    --callout-tip-fg: 142 78% 84%;
+    --callout-danger-bg: 0 42% 18%;
+    --callout-danger-fg: 0 80% 84%;
   }
 }
 
@@ -193,12 +221,50 @@ All colors MUST be HSL.
     color: hsl(var(--risk-medium-fg));
   }
 
-  .risk-badge-low {
-    @apply risk-badge;
-    background-color: hsl(var(--risk-low-bg));
-    color: hsl(var(--risk-low-fg));
+  .blog-prose {
+    @apply space-y-6 text-[1.125rem] leading-8 text-foreground;
+  }
+
+  .blog-prose h2,
+  .blog-prose h3 {
+    @apply pt-2;
+  }
+
+  .terminal-surface {
+    @apply font-mono;
+    background-color: hsl(var(--terminal-bg));
+    color: hsl(var(--terminal-fg));
+  }
+
+  .terminal-command {
+    color: hsl(var(--terminal-command));
+  }
+
+  .terminal-output {
+    color: hsl(var(--terminal-output));
+  }
+
+  .blog-callout {
+    @apply rounded-xl border px-4 py-3 text-sm;
+  }
+
+  .blog-callout-info {
+    background-color: hsl(var(--callout-info-bg));
+    color: hsl(var(--callout-info-fg));
+  }
+
+  .blog-callout-warning {
+    background-color: hsl(var(--callout-warning-bg));
+    color: hsl(var(--callout-warning-fg));
+  }
+
+  .blog-callout-tip {
+    background-color: hsl(var(--callout-tip-bg));
+    color: hsl(var(--callout-tip-fg));
+  }
+
+  .blog-callout-danger {
+    background-color: hsl(var(--callout-danger-bg));
+    color: hsl(var(--callout-danger-fg));
   }
 }
-
-
-
