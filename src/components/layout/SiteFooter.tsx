@@ -6,6 +6,7 @@ const quickLinks = [
   { label: "About", to: "/about" },
   { label: "GRC Projects", to: "/grc-projects" },
   { label: "Frameworks", to: "/frameworks" },
+  { label: "Blog", to: "/blog" },
   { label: "Resume", to: "/resume" },
   { label: "Contact", to: "/contact" },
 ];
