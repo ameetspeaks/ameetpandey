@@ -14,9 +14,15 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Resume from "./pages/Resume";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
 import AdminPostsList from "./pages/admin/posts/AdminPostsList";
 import AdminPostEditor from "./pages/admin/posts/AdminPostEditor";
+import AdminAnalytics from "./pages/admin/analytics/AdminAnalytics";
+import AdminCategories from "./pages/admin/categories/AdminCategories";
+import AdminComments from "./pages/admin/comments/AdminComments";
+import AdminMedia from "./pages/admin/media/AdminMedia";
+import AdminSettings from "./pages/admin/settings/AdminSettings";
+import AdminSubscribers from "./pages/admin/subscribers/AdminSubscribers";
+import AdminTags from "./pages/admin/tags/AdminTags";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Login from "./pages/auth/Login";
 import ResetPassword from "./pages/auth/ResetPassword";
@@ -83,13 +89,13 @@ const App = () => (
               <Route path="posts" element={<AdminPostsList />} />
               <Route path="posts/new" element={<AdminPostEditor />} />
               <Route path="posts/edit/:id" element={<AdminPostEditor />} />
-              <Route path="categories" element={<AdminPlaceholder title="Categories" description="Categories CRUD will be added in Milestone D." />} />
-              <Route path="tags" element={<AdminPlaceholder title="Tags" description="Tags CRUD will be added in Milestone D." />} />
-              <Route path="media" element={<AdminPlaceholder title="Media Library" description="Media management will be added in Milestone D." />} />
-              <Route path="comments" element={<AdminPlaceholder title="Comments" description="Comments moderation will be added in Milestone D." />} />
-              <Route path="subscribers" element={<AdminPlaceholder title="Subscribers" description="Subscribers management will be added in Milestone D." />} />
-              <Route path="analytics" element={<AdminPlaceholder title="Analytics" description="Analytics dashboards will be added in Milestone D." />} />
-              <Route path="settings" element={<AdminPlaceholder title="Settings" description="Blog/site settings will be added in Milestone D." />} />
+              <Route path="categories" element={<AdminCategories />} />
+              <Route path="tags" element={<AdminTags />} />
+              <Route path="media" element={<AdminMedia />} />
+              <Route path="comments" element={<AdminComments />} />
+              <Route path="subscribers" element={<AdminSubscribers />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />
