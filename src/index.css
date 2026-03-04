@@ -41,6 +41,13 @@ All colors MUST be HSL.
     --radius: 0.625rem;
     --hero-gradient: linear-gradient(120deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
 
+    --risk-high-bg: 0 78% 96%;
+    --risk-high-fg: 0 70% 42%;
+    --risk-medium-bg: 45 100% 95%;
+    --risk-medium-fg: 34 86% 35%;
+    --risk-low-bg: 145 56% 94%;
+    --risk-low-fg: 154 62% 28%;
+
     --sidebar-background: 220 14% 98%;
     --sidebar-foreground: 215 28% 17%;
     --sidebar-primary: 223 64% 33%;
@@ -82,6 +89,13 @@ All colors MUST be HSL.
     --border: 222 24% 24%;
     --input: 222 24% 24%;
     --ring: 174 68% 42%;
+
+    --risk-high-bg: 0 42% 20%;
+    --risk-high-fg: 0 92% 82%;
+    --risk-medium-bg: 42 56% 20%;
+    --risk-medium-fg: 45 98% 82%;
+    --risk-low-bg: 154 42% 20%;
+    --risk-low-fg: 145 82% 82%;
 
     --sidebar-background: 223 30% 12%;
     --sidebar-foreground: 210 40% 98%;
@@ -142,6 +156,49 @@ All colors MUST be HSL.
   .surface-card {
     @apply rounded-xl border border-border bg-card shadow-soft;
   }
+
+  .data-table-wrap {
+    @apply overflow-hidden rounded-xl border border-border;
+  }
+
+  .data-table {
+    @apply w-full border-collapse text-left text-sm;
+  }
+
+  .data-table thead {
+    @apply bg-secondary/70;
+  }
+
+  .data-table th {
+    @apply px-4 py-3 font-semibold text-foreground;
+  }
+
+  .data-table td {
+    @apply border-t border-border px-4 py-3 text-muted-foreground;
+  }
+
+  .risk-badge {
+    @apply inline-flex rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+
+  .risk-badge-high {
+    @apply risk-badge;
+    background-color: hsl(var(--risk-high-bg));
+    color: hsl(var(--risk-high-fg));
+  }
+
+  .risk-badge-medium {
+    @apply risk-badge;
+    background-color: hsl(var(--risk-medium-bg));
+    color: hsl(var(--risk-medium-fg));
+  }
+
+  .risk-badge-low {
+    @apply risk-badge;
+    background-color: hsl(var(--risk-low-bg));
+    color: hsl(var(--risk-low-fg));
+  }
 }
+
 
 
