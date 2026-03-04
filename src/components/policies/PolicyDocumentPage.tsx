@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 type PolicySection = {
   title: string;
+  sectionNumber?: string;
   paragraphs?: string[];
   items?: string[];
 };
@@ -12,7 +13,7 @@ type PolicyDocumentPageProps = {
   effectiveDate: string;
   lastReviewDate: string;
   sections: PolicySection[];
-  downloadPath: string;
+  downloadPath?: string | null;
 };
 
 const PolicyDocumentPage = ({
@@ -58,7 +59,8 @@ const PolicyDocumentPage = ({
             {sections.map((section, index) => (
               <section key={section.title} className="space-y-3">
                 <h2 className="text-xl">
-                  {index + 1}. {section.title}
+                  {section.sectionNumber ? `${section.sectionNumber} ` : `${index + 1}. `}
+                  {section.title}
                 </h2>
                 {section.paragraphs?.map((paragraph) => (
                   <p key={paragraph} className="text-sm leading-7 text-muted-foreground sm:text-base">
@@ -68,9 +70,7 @@ const PolicyDocumentPage = ({
                 {section.items ? (
                   <ol className="space-y-1.5 text-sm leading-7 text-muted-foreground sm:text-base">
                     {section.items.map((item, itemIndex) => (
-                      <li key={item}>
-                        {index + 1}.{itemIndex + 1} {item}
-                      </li>
+                      <li key={item}>{section.sectionNumber ? `${section.sectionNumber}.${itemIndex + 1}` : `${index + 1}.${itemIndex + 1}`} {item}</li>
                     ))}
                   </ol>
                 ) : null}
@@ -84,13 +84,15 @@ const PolicyDocumentPage = ({
                 Document Control: {policyTitle} • Version {version} • Last Reviewed {lastReviewDate}
               </p>
               <div className="flex flex-wrap gap-2">
-                <a
-                  href={downloadPath}
-                  download
-                  className="inline-flex rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-                >
-                  Download as PDF
-                </a>
+                {downloadPath ? (
+                  <a
+                    href={downloadPath}
+                    download
+                    className="inline-flex rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+                  >
+                    Download as PDF
+                  </a>
+                ) : null}
                 <Link
                   to="/frameworks"
                   className="inline-flex rounded-md border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground hover:border-primary hover:text-primary"
