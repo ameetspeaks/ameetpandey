@@ -14,13 +14,58 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_analytics_events: {
+        Row: {
+          created_at: string
+          device_type: string | null
+          event_type: string
+          id: string
+          metadata: Json
+          post_id: string | null
+          referrer: string | null
+          user_session_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          device_type?: string | null
+          event_type: string
+          id?: string
+          metadata?: Json
+          post_id?: string | null
+          referrer?: string | null
+          user_session_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          device_type?: string | null
+          event_type?: string
+          id?: string
+          metadata?: Json
+          post_id?: string | null
+          referrer?: string | null
+          user_session_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_analytics_events_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blog_categories: {
         Row: {
           created_at: string
           description: string | null
+          featured_image: string | null
           id: string
           is_active: boolean
+          meta_description: string | null
+          meta_title: string | null
           name: string
+          parent_id: string | null
           slug: string
           sort_order: number
           updated_at: string
@@ -28,9 +73,13 @@ export type Database = {
         Insert: {
           created_at?: string
           description?: string | null
+          featured_image?: string | null
           id?: string
           is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
           name: string
+          parent_id?: string | null
           slug: string
           sort_order?: number
           updated_at?: string
@@ -38,12 +87,123 @@ export type Database = {
         Update: {
           created_at?: string
           description?: string | null
+          featured_image?: string | null
           id?: string
           is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
           name?: string
+          parent_id?: string | null
           slug?: string
           sort_order?: number
           updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_categories_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "blog_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_comments: {
+        Row: {
+          author_email: string
+          author_name: string
+          content: string
+          created_at: string
+          id: string
+          parent_id: string | null
+          post_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          author_email: string
+          author_name: string
+          content: string
+          created_at?: string
+          id?: string
+          parent_id?: string | null
+          post_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          author_email?: string
+          author_name?: string
+          content?: string
+          created_at?: string
+          id?: string
+          parent_id?: string | null
+          post_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_comments_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "blog_comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blog_comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_media: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          created_at: string
+          file_path: string
+          file_size: number | null
+          filename: string
+          height: number | null
+          id: string
+          mime_type: string | null
+          public_url: string
+          updated_at: string
+          uploaded_by: string | null
+          width: number | null
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          file_path: string
+          file_size?: number | null
+          filename: string
+          height?: number | null
+          id?: string
+          mime_type?: string | null
+          public_url: string
+          updated_at?: string
+          uploaded_by?: string | null
+          width?: number | null
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          file_path?: string
+          file_size?: number | null
+          filename?: string
+          height?: number | null
+          id?: string
+          mime_type?: string | null
+          public_url?: string
+          updated_at?: string
+          uploaded_by?: string | null
+          width?: number | null
         }
         Relationships: []
       }
@@ -281,6 +441,105 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      blog_settings: {
+        Row: {
+          bing_verification_code: string | null
+          blog_tagline: string
+          blog_title: string
+          comments_enabled: boolean
+          comments_require_approval: boolean
+          contact_email: string | null
+          custom_css: string | null
+          date_format: string
+          default_meta_description: string | null
+          default_og_image: string | null
+          footer_injection: string | null
+          github_url: string | null
+          google_analytics_id: string | null
+          google_verification_code: string | null
+          header_injection: string | null
+          id: boolean
+          linkedin_url: string | null
+          newsletter_api_key_hint: string | null
+          newsletter_provider: string | null
+          posts_per_page: number
+          robots_txt: string | null
+          share_buttons_position: string
+          show_author_bio: boolean
+          show_related_posts: boolean
+          sitemap_enabled: boolean
+          spam_words: string[]
+          timezone: string
+          toc_enabled: boolean
+          twitter_handle: string | null
+          updated_at: string
+        }
+        Insert: {
+          bing_verification_code?: string | null
+          blog_tagline?: string
+          blog_title?: string
+          comments_enabled?: boolean
+          comments_require_approval?: boolean
+          contact_email?: string | null
+          custom_css?: string | null
+          date_format?: string
+          default_meta_description?: string | null
+          default_og_image?: string | null
+          footer_injection?: string | null
+          github_url?: string | null
+          google_analytics_id?: string | null
+          google_verification_code?: string | null
+          header_injection?: string | null
+          id?: boolean
+          linkedin_url?: string | null
+          newsletter_api_key_hint?: string | null
+          newsletter_provider?: string | null
+          posts_per_page?: number
+          robots_txt?: string | null
+          share_buttons_position?: string
+          show_author_bio?: boolean
+          show_related_posts?: boolean
+          sitemap_enabled?: boolean
+          spam_words?: string[]
+          timezone?: string
+          toc_enabled?: boolean
+          twitter_handle?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bing_verification_code?: string | null
+          blog_tagline?: string
+          blog_title?: string
+          comments_enabled?: boolean
+          comments_require_approval?: boolean
+          contact_email?: string | null
+          custom_css?: string | null
+          date_format?: string
+          default_meta_description?: string | null
+          default_og_image?: string | null
+          footer_injection?: string | null
+          github_url?: string | null
+          google_analytics_id?: string | null
+          google_verification_code?: string | null
+          header_injection?: string | null
+          id?: boolean
+          linkedin_url?: string | null
+          newsletter_api_key_hint?: string | null
+          newsletter_provider?: string | null
+          posts_per_page?: number
+          robots_txt?: string | null
+          share_buttons_position?: string
+          show_author_bio?: boolean
+          show_related_posts?: boolean
+          sitemap_enabled?: boolean
+          spam_words?: string[]
+          timezone?: string
+          toc_enabled?: boolean
+          twitter_handle?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       blog_subscribers: {
         Row: {
