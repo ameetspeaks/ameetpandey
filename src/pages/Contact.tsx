@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be under 100 characters"),
@@ -59,10 +61,19 @@ const Contact = () => {
     },
   });
 
-  const onSubmit = async (_values: ContactFormValues) => {
+  const onSubmit = async (values: ContactFormValues) => {
     try {
       setIsSubmitting(true);
-      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: values.name,
+        email: values.email,
+        subject: values.subject,
+        message: values.message,
+      });
+
+      if (error) throw error;
+
       toast({ title: "Message sent", description: "Thanks for reaching out. I will get back to you soon." });
       form.reset({ name: "", email: "", subject: "General Inquiry", message: "" });
     } catch {
